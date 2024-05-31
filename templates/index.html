@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Image Search</title>
+    <style>
+      label {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="post" action="/">
+      <label for="keyword">Enter a keyword:</label>
+      <input type="text" id="keyword" name="keyword">
+      <button type="submit">Search</button>
+    </form> 
+
+    {% if keyword %}
+    <p>Searched keyword: {{ keyword }}</p>
+    {% endif %}
+
+    {% if matched_word %}
+      <p>Closest match: {{ matched_word }}</p>
+      <p>Match ratio: {{ ratio }}</p>
+      {% if animal_list %}
+        {% for animal in animal_list %}
+        <img src="{{ animal|replace('\\', '/') }}" width="300" height="200">
+        {% endfor %}
+      {% else %}
+        <p>No matching images found.</p>
+      {% endif %}
+    {% endif %}
+  </body>
+</html>
